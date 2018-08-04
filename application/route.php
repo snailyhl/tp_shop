@@ -73,4 +73,12 @@ Route::group('admin', function (){
 	Route::any('category/upd', 'admin/category/upd');
 	Route::get('category/del', 'admin/category/del');
 
+	// 后台商品管理路由
+	Route::any('goods/add', 'admin/goods/add');
+	Route::get('goods/index', 'admin/goods/index');
+	Route::any('goods/upd', 'admin/goods/upd');
+	Route::get('goods/del', 'admin/goods/del');
+	# ajax获取指定类型商品的属性的路由
+	Route::any('goods/getTypeAttr', 'admin/goods/getTypeAttr');
+
 });
