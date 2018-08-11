@@ -52,34 +52,34 @@
                     <label>商品分类</label>
                     <select name="cat_id" class="dfinput" >
                         {foreach name='categorys' item='cat'}
-                        <option value="{$cat['cat_name']}">{:str_repeat('&nbsp;', $cat['level']*3)}{$cat['cat_name']}</option>
+                        <option value="{$cat['cat_id']}">{:str_repeat('&nbsp;', $cat['level']*3)}{$cat['cat_name']}</option>
                         {/foreach}
                     </select>
                 </li>
                 <li>
                     <label>回收站</label>
-                    <input name="is_delete" type="radio" value="0" />   是 &nbsp;&nbsp;&nbsp;
-                    <input name="is_delete" type="radio" value="1" />   否
+                    <input name="is_delete" type="radio" value="1" />   是 &nbsp;&nbsp;&nbsp;
+                    <input name="is_delete" type="radio" value="0" checked="checked" />   否
                 </li>
                 <li>
                     <label>是否上架</label>
-                    <input name="is_sale" type="radio" value="0" />   是 &nbsp;&nbsp;&nbsp;
-                    <input name="is_sale" type="radio" value="1" />   否
+                    <input name="is_sale" type="radio" value="1" checked="checked" />   是 &nbsp;&nbsp;&nbsp;
+                    <input name="is_sale" type="radio" value="0" />   否
                 </li>
                 <li>
                     <label>是否新品</label>
-                    <input name="is_new" type="radio" value="0" />   是 &nbsp;&nbsp;&nbsp;
-                    <input name="is_new" type="radio" value="1" />   否
+                    <input name="is_new" type="radio" value="1" checked="checked" />   是 &nbsp;&nbsp;&nbsp;
+                    <input name="is_new" type="radio" value="0" />   否
                 </li>
                 <li>
                     <label>是否热卖</label>
-                    <input name="is_hot" type="radio" value="0" />   是 &nbsp;&nbsp;&nbsp;
-                    <input name="is_hot" type="radio" value="1" />   否
+                    <input name="is_hot" type="radio" value="1" checked="checked" />   是 &nbsp;&nbsp;&nbsp;
+                    <input name="is_hot" type="radio" value="0" />   否
                 </li>
                 <li>
                     <label>是否推荐</label>
-                    <input name="is_best" type="radio" value="0" />   是 &nbsp;&nbsp;&nbsp;
-                    <input name="is_best" type="radio" value="1" />   否
+                    <input name="is_best" type="radio" value="1" checked="checked" />   是 &nbsp;&nbsp;&nbsp;
+                    <input name="is_best" type="radio" value="0" />   否
                 </li>
                 <li>
                     <label>商品描述</label>

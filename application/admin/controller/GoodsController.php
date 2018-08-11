@@ -12,7 +12,11 @@ class GoodsController extends CommonController
 {
 	public function index()
 	{
-		
+		$goods = GoodsModel::alias('t1')
+			->field('t1.*, t2.cat_name')
+			->join('sh_category t2', 't1.cat_id = t2.cat_id', 'left')
+			->select();
+		return $this->fetch('', ['goods' => $goods]);
 	}
 
 	public function add()
@@ -21,12 +25,12 @@ class GoodsController extends CommonController
 		if(request()->isPost()){
 			//接收参数
 			$postData = input('post.');
-			halt($postData);
-			//验证器验证
-			// $result = $this->validate($postData,'Goods.add',[],true);
-			// if($result !== true){
-			// 	$this->error(implode(',',$result));
-			// }
+			// halt($postData);
+			// 验证器验证
+			$result = $this->validate($postData,'Goods.add',[],true);
+			if($result !== true){
+				$this->error(implode(',',$result));
+			}
 
 			# 文件上传 
 			$goods_img = $goodsModel->uploadImg();	# 调用模型的自定义uploadImg()方法
@@ -37,7 +41,7 @@ class GoodsController extends CommonController
 				$postData['goods_middle'] = json_encode( $thumb['goods_middle'] );
 				$postData['goods_thumb'] = json_encode( $thumb['goods_thumb'] );
 			}
-
+			// halt($postData);
 			//入库
 			if($goodsModel->allowField(true)->save($postData)){
 				$this->success("入库成功",url("admin/goods/index"));

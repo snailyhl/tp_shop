@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:65:"F:\www\local.shop\public/../application/admin\view\goods\add.html";i:1533310627;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:65:"F:\www\local.shop\public/../application/admin\view\goods\add.html";i:1533476717;}*/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -53,34 +53,34 @@
                     <label>商品分类</label>
                     <select name="cat_id" class="dfinput" >
                         <?php if(is_array($categorys) || $categorys instanceof \think\Collection || $categorys instanceof \think\Paginator): if( count($categorys)==0 ) : echo "" ;else: foreach($categorys as $key=>$cat): ?>
-                        <option value="<?php echo $cat['cat_name']; ?>"><?php echo str_repeat('&nbsp;', $cat['level']*3); ?><?php echo $cat['cat_name']; ?></option>
+                        <option value="<?php echo $cat['cat_id']; ?>"><?php echo str_repeat('&nbsp;', $cat['level']*3); ?><?php echo $cat['cat_name']; ?></option>
                         <?php endforeach; endif; else: echo "" ;endif; ?>
                     </select>
                 </li>
                 <li>
                     <label>回收站</label>
-                    <input name="is_delete" type="radio" value="0" />   是 &nbsp;&nbsp;&nbsp;
-                    <input name="is_delete" type="radio" value="1" />   否
+                    <input name="is_delete" type="radio" value="1" />   是 &nbsp;&nbsp;&nbsp;
+                    <input name="is_delete" type="radio" value="0" checked="checked" />   否
                 </li>
                 <li>
                     <label>是否上架</label>
-                    <input name="is_sale" type="radio" value="0" />   是 &nbsp;&nbsp;&nbsp;
-                    <input name="is_sale" type="radio" value="1" />   否
+                    <input name="is_sale" type="radio" value="1" checked="checked" />   是 &nbsp;&nbsp;&nbsp;
+                    <input name="is_sale" type="radio" value="0" />   否
                 </li>
                 <li>
                     <label>是否新品</label>
-                    <input name="is_new" type="radio" value="0" />   是 &nbsp;&nbsp;&nbsp;
-                    <input name="is_new" type="radio" value="1" />   否
+                    <input name="is_new" type="radio" value="1" checked="checked" />   是 &nbsp;&nbsp;&nbsp;
+                    <input name="is_new" type="radio" value="0" />   否
                 </li>
                 <li>
                     <label>是否热卖</label>
-                    <input name="is_hot" type="radio" value="0" />   是 &nbsp;&nbsp;&nbsp;
-                    <input name="is_hot" type="radio" value="1" />   否
+                    <input name="is_hot" type="radio" value="1" checked="checked" />   是 &nbsp;&nbsp;&nbsp;
+                    <input name="is_hot" type="radio" value="0" />   否
                 </li>
                 <li>
                     <label>是否推荐</label>
-                    <input name="is_best" type="radio" value="0" />   是 &nbsp;&nbsp;&nbsp;
-                    <input name="is_best" type="radio" value="1" />   否
+                    <input name="is_best" type="radio" value="1" checked="checked" />   是 &nbsp;&nbsp;&nbsp;
+                    <input name="is_best" type="radio" value="0" />   否
                 </li>
                 <li>
                     <label>商品描述</label>

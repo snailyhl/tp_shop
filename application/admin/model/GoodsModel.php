@@ -1,9 +1,11 @@
 <?php 
 
 namespace app\admin\model;
+
 use think\Model;
 use think\Db;
-
+use think\Validate;
+use app\admin\model\CategoryModel;
 
 class GoodsModel extends Model{
 	protected $table = 'sh_goods';
@@ -18,14 +20,17 @@ class GoodsModel extends Model{
 			$goods['goods_sn'] = date('ymdhis').uniqid();
 		});
 
-		# 入库后事件,完成商品属性入库到商品属性表
+		# 入库后事件,完成商品属性入库到商品属性表sh_goods_attr,并将商品分类入库到分类表sh_category
 		GoodsModel::event('after_insert', function ($goods)
 		{
 			# $goods 表单数据入库后返回表的记录数据对象
 			$goods_id = $goods['goods_id'];
 			$postData = input('post.');
-			$goodsAttrValue = $postData['goodAttrValue'];
+
+			// halt($goods['goods_id']);
+			$goodsAttrValue = $postData['goodsAttrValue'];
 			$goodsAttrPrice = $postData['goodsAttrPrice'];
+			// var_dump($goodsAttrPrice);echo "<hr/>";	halt($goodsAttrValue);
 			foreach ($goodsAttrValue as $attr_id => $attr_value) {
 				# 单选属性$attr_value是一个数组
 				if ( is_array($attr_value) ) {
@@ -39,6 +44,7 @@ class GoodsModel extends Model{
 							'create_time' => time(),
 							'update_time' => time(),
 						];
+						// halt($data);
 						Db::name('goods_attr')->insert($data);
 					}
 				}else {
@@ -51,6 +57,22 @@ class GoodsModel extends Model{
 					];
 					Db::name('goods_attr')->insert($data);
 				}
+			}
+
+			# 将商品入库到分类表sh_category
+			# 在配置文件中设置新增商品分类是否显示 (show_new_goods)
+			// unique:category
+			$validate = new Validate([
+				'cat_name' => 'unique:category',
+			]);
+			$data = [
+				'cat_name' => $postData['goods_name'],
+				'is_show' => config('show_new_goods'),
+				'pid' => $postData['cat_id']
+			];
+			if ( $validate->check($data) ) {
+				$category = new CategoryModel();
+				$category->allowField(true)->save($data);
 			}
 		});
 	}
@@ -102,7 +124,7 @@ class GoodsModel extends Model{
 			$thumb_path = $arr_img[0] . '/thumb_' . $arr_img[1];
 			$goods_thumb[] = $thumb_path;
 			$image = \think\Image::open('./static/upload/' . $str_img);
-			$image->thumb(350, 350, 2)->save('./static/upload/' . $thumb_path);
+			$image->thumb(50, 50, 2)->save('./static/upload/' . $thumb_path);
 		}
 		return ['goods_middle' => $goods_middle, 'goods_thumb' => $goods_thumb];
 	}

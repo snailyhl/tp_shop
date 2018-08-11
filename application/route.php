@@ -22,10 +22,73 @@
 
 use think\Route;
 
-// Route::get('/', 'admin/index/index');
+// 前台首页
+Route::get('/', 'home/index/index');
 
-// 后台路由群组
+
+// 前台路由群组
+Route::group('home', function() {
+
+	# 订单提交路由
+	Route::any('order/orderpay', 'home/order/orderpay');
+	# 我的订单
+	Route::any('order/selforder', 'home/order/selforder');
+	# 付款路由
+	Route::any('order/payMoney', 'home/order/payMoney');
+
+	# 支付宝同步通知路由
+	Route::any('order/returnurl', 'home/order/returnurl');
+	# 支付宝异步通知路由
+	Route::any('order/notifyurl', 'home/order/notifyurl');
+	# 支付宝支付完成路由
+	Route::any('order/orderdone', 'home/order/orderdone');
+
+	# 分类列表路由
+	Route::any('category/index', 'home/category/index');
+
+	# 购物车商品数量更新路由
+	Route::any('cart/updatecartgood', 'home/cart/updatecartgood');
+	# 购物车加入商品路由
+	Route::any('cart/addgoodstocart', 'home/cart/addgoodstocart');
+	# 购物车商品列表路由
+	Route::any('cart/cartlist', 'home/cart/cartlist');
+	# 购物车删除商品路由
+	Route::any('cart/delcartgood', 'home/cart/delcartgood');
+	# 清空购物车
+	Route::any('cart/clearcartgood', 'home/cart/clearcartgood');
+	# 购物车结算
+	Route::any('cart/orderaccount', 'home/cart/orderaccount');
+
+	# 商品详情路由
+	Route::any('goods/detail', 'home/goods/detail');
+
+	// 前台注册路由
+	Route::any('public/register', 'home/public/register');
+	// 前台登录退出路由
+	Route::any('public/login', 'home/public/login');
+	Route::any('public/logout', 'home/public/logout');
+	// 忘记密码路由
+	Route::any('public/forgetPassword', 'home/public/forgetPassword');
+	// 重置密码路由
+	Route::any('public/resetpassword/:member_id/:hash/:time', 'home/public/resetPassword');
+
+	# 短信发送路由
+	Route::any('public/sendSms', 'home/public/sendSms');
+	# 邮件发送路由
+	Route::any('public/sendEmail', 'home/public/sendEmail');
+});
+
+
+// --------------------- 后台路由群组 ------------------------------- //
 Route::group('admin', function (){
+
+	// 后台订单管理
+	Route::any('order/index', 'admin/order/index');
+	// 订单分配物流
+	Route::any('order/setwuliu', 'admin/order/setwuliu');
+	// 查询物流
+	Route::any('order/getwuliu', 'admin/order/getwuliu');
+
 	// 后台首页路由
 	Route::get('index/index', 'admin/index/index');
 	Route::get('index/left', 'admin/index/left');
